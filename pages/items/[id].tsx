@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 const ItemDetail: NextPage = () => {
   return (
-    <div className="px-4 py-10">
+    <div className="max-w-lg px-4 py-10 mx-auto">
       <div className="mb-8">
-        <div className="h-96 bg-slate-300" />
+        <div className="h-96 bg-slate-300 " />
         <div className="flex items-center py-3 space-x-3 border-t border-b cursor-pointer">
           <div className="w-12 h-12 rounded-full bg-slate-300" />
           <div>
@@ -17,14 +17,10 @@ const ItemDetail: NextPage = () => {
           <h1 className="text-3xl font-bold text-gray-900">Galaxy S50</h1>
           <span className="block mt-3 text-2xl text-gray-900">$140</span>
           <p className="my-6 text-gray-700 ">
-            My money&apos;s in that office, right? If she start giving me some
-            bullshit about it ain&apos;t there, and we got to go someplace else
-            and get it, I&apos;m gonna shoot you in the head then and there.
-            Then I&apos;m gonna shoot that bitch in the kneecaps, find out where
-            my goddamn money is. She gonna tell me too. Hey, look at me when
-            I&apos;m talking to you, motherfucker. You listen: we go in there,
-            and that ni**a Winston or anybody else is in there, you the first
-            motherfucker to get shot. You understand?
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt,
+            blanditiis tempora non eveniet ex magni, excepturi beatae ut
+            corporis, voluptatum ipsa porro inventore numquam voluptatem maxime
+            praesentium illum architecto quam!
           </p>
           <div className="flex items-center justify-between space-x-2">
             <button className="flex-1 py-3 font-medium text-white bg-orange-500 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 hover:bg-orange-600 focus:ring-orange-500 ">
