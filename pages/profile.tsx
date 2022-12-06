@@ -9,7 +9,8 @@ const ItemDetail: NextPage = () => {
         <div className="mb-8">
           <div className="h-96 bg-slate-300" />
           <div className="flex items-center py-3 space-x-3 border-t border-b cursor-pointer">
-	@@ -30,9 +31,7 @@ const ItemDetail: NextPage = () => {
+            <p>
+              const ItemDetail: NextPage = () => {
               the first motherfucker to get shot. You understand?
             </p>
             <div className="flex items-center justify-between space-x-2">
