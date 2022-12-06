@@ -142,12 +142,12 @@ const Profile: NextPage = () => {
           </div>
           <div className="mt-4 text-sm text-gray-600">
             <p>
-              Normally, both your asses would be dead as fucking fried chicken,
-              but you happen to pull this shit while I&apos;m in a transitional
-              period so I don&apos;t wanna kill you, I wanna help you. But I
-              can&apos;t give you this case, it don&apos;t belong to me.
-              Besides, I&apos;ve already been through too much shit this morning
-              over this case to hand it over to your dumb ass.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
+              aliquid hic neque rem et dicta ut aliquam repellat dolor impedit
+              animi, maxime adipisci provident autem accusamus atque voluptates
+              nisi eius. hic neque rem et dicta ut aliquam repellat dolor
+              impedit animi, maxime adipisci provident autem accusamus atque
+              voluptates nisi eius.
             </p>
           </div>
         </div>
