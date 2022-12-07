@@ -19,8 +19,8 @@ export default function Layout({
     router.back();
   };
   return (
-    <div>
-      <div className="fixed top-0 flex items-center justify-center w-full h-12 max-w-xl px-10 text-lg font-medium text-gray-800 bg-white border-b">
+    <div className="scrollbar-hide">
+      <div className="fixed top-0 flex items-center justify-center w-full h-12 max-w-xl px-10 overflow-y-scroll text-lg font-medium text-gray-800 bg-white border-b scrollbar-hide">
         {canGoBack ? (
           <button onClick={onClick} className="absolute left-4">
             <svg

@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import Button from "../../components/button";
-import Layout from "../../components/layout";
+import Button from "../components/button";
+import Layout from "../components/layout";
 
 const ItemDetail: NextPage = () => {
   return (
@@ -9,10 +9,6 @@ const ItemDetail: NextPage = () => {
         <div className="mb-8">
           <div className="h-96 bg-slate-300" />
           <div className="flex items-center py-3 space-x-3 border-t border-b cursor-pointer">
-            <p>
-              const ItemDetail: NextPage = () => {
-              the first motherfucker to get shot. You understand?
-            </p>
             <div className="flex items-center justify-between space-x-2">
               <Button large text="Talk to seller" />
               <button className="flex items-center justify-center p-3 text-gray-400 rounded-md hover:bg-gray-100 hover:text-gray-500">
