@@ -19,8 +19,8 @@ export default function Layout({
     router.back();
   };
   return (
-    <div className="scrollbar-hide">
-      <div className="fixed top-0 flex items-center justify-center w-full h-12 max-w-xl px-10 overflow-y-scroll text-lg font-medium text-gray-800 bg-white border-b scrollbar-hide">
+    <div className=" min-w-[384px] w-[576px]">
+      <div className="fixed top-0 flex items-center justify-center w-full h-12 max-w-xl px-10 overflow-y-scroll text-lg font-medium text-gray-800 bg-white border-b ">
         {canGoBack ? (
           <button onClick={onClick} className="absolute left-4">
             <svg
@@ -45,7 +45,7 @@ export default function Layout({
       </div>
       <div className={cls("pt-12", hasTabBar ? "pb-24" : "")}>{children}</div>
       {hasTabBar ? (
-        <nav className="fixed bottom-0 flex justify-between w-full max-w-xl px-10 pt-3 pb-5 text-xs text-gray-700 bg-white border-t">
+        <nav className="fixed bottom-0 flex justify-between w-full max-w-xl px-10 pt-3 pb-5 text-xs text-gray-700 bg-white border-t ">
           <Link href="/">
             <a
               className={cls(
