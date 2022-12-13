@@ -11,12 +11,23 @@ interface EnterForm {
 }
 
 const Enter: NextPage = () => {
-  const { register } = useForm<EnterForm>();
+  const { register, reset, handleSubmit } = useForm<EnterForm>();
   const [method, setMethod] = useState<"email" | "phone">("email");
-  const onEmailClick = () => setMethod("email");
-  const onPhoneClick = () => setMethod("phone");
+  const onEmailClick = () => {
+    reset();
+    setMethod("email");
+  };
+  const onPhoneClick = () => {
+    reset();
+    setMethod("phone");
+  };
+
+  const onVaild = (data: EnterForm) => {
+    console.log(data);
+  };
+
   return (
-    <div className="px-4 mt-16">
+    <div className="px-4 mt-16 border">
       <h3 className="text-3xl font-bold text-center">Enter to Carrot</h3>
       <div className="mt-12">
         <div className="flex flex-col items-center">
@@ -46,7 +57,10 @@ const Enter: NextPage = () => {
             </button>
           </div>
         </div>
-        <form className="flex flex-col mt-8 space-y-4">
+        <form
+          className="flex flex-col mt-8 space-y-4"
+          onSubmit={handleSubmit(onVaild)}
+        >
           {method === "email" ? (
             <Input
               register={register("email")}
