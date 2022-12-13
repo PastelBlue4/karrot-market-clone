@@ -1,10 +1,17 @@
 import type { NextPage } from "next";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import Button from "../components/button";
 import Input from "../components/input";
 import { cls } from "../libs/utils";
 
+interface EnterForm {
+  email?: string;
+  phone?: string;
+}
+
 const Enter: NextPage = () => {
+  const { register } = useForm<EnterForm>();
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => setMethod("email");
   const onPhoneClick = () => setMethod("phone");
@@ -41,7 +48,13 @@ const Enter: NextPage = () => {
         </div>
         <form className="flex flex-col mt-8 space-y-4">
           {method === "email" ? (
-            <Input name="email" label="Email address" type="email" required />
+            <Input
+              register={register("email")}
+              name="email"
+              label="Email address"
+              type="email"
+              required
+            />
           ) : null}
           {method === "phone" ? (
             <Input
@@ -49,6 +62,7 @@ const Enter: NextPage = () => {
               label="Phone number"
               type="number"
               kind="phone"
+              register={register("phone")}
               required
             />
           ) : null}
