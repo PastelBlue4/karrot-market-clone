@@ -11,6 +11,7 @@ interface EnterForm {
 }
 
 const Enter: NextPage = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { register, reset, handleSubmit } = useForm<EnterForm>();
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => {
@@ -23,15 +24,24 @@ const Enter: NextPage = () => {
   };
 
   const onVaild = (data: EnterForm) => {
-    console.log(data);
+    setIsSubmitting(true);
+    fetch("api/users/enter", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(() => {
+      setIsSubmitting(false);
+    });
   };
 
   return (
     <div className="px-4 mt-16 border">
-      <h3 className="text-3xl font-bold text-center">Enter to Carrot</h3>
+      <h3 className="text-3xl font-bold text-center">캐럿마켓 로그인 </h3>
       <div className="mt-12">
         <div className="flex flex-col items-center">
-          <h5 className="text-sm font-medium text-gray-500">Enter using:</h5>
+          <h5 className="text-sm font-medium text-gray-500"></h5>
           <div className="grid w-full grid-cols-2 mt-8 border-b ">
             <button
               className={cls(
@@ -42,7 +52,7 @@ const Enter: NextPage = () => {
               )}
               onClick={onEmailClick}
             >
-              Email
+              이메일로 로그인하기
             </button>
             <button
               className={cls(
@@ -53,7 +63,7 @@ const Enter: NextPage = () => {
               )}
               onClick={onPhoneClick}
             >
-              Phone
+              휴대폰으로 로그인하기
             </button>
           </div>
         </div>
@@ -65,7 +75,7 @@ const Enter: NextPage = () => {
             <Input
               register={register("email")}
               name="email"
-              label="Email address"
+              label="이메일을 입력해주세요."
               type="email"
               required
             />
@@ -73,16 +83,18 @@ const Enter: NextPage = () => {
           {method === "phone" ? (
             <Input
               name="phone"
-              label="Phone number"
+              label="휴대폰 번호를 입력해 주세요."
               type="number"
               kind="phone"
               register={register("phone")}
               required
             />
           ) : null}
-          {method === "email" ? <Button text={"Get login link"} /> : null}
+          {method === "email" ? <Button text={"로그인 링크 받기 "} /> : null}
           {method === "phone" ? (
-            <Button text={"Get one-time password"} />
+            <Button
+              text={isSubmitting ? "정보를 불러 오고있어요" : "인증문자 받기"}
+            />
           ) : null}
         </form>
 
@@ -91,7 +103,7 @@ const Enter: NextPage = () => {
             <div className="absolute w-full border-t border-gray-300" />
             <div className="relative text-center -top-3 ">
               <span className="px-2 text-sm text-gray-500 bg-white">
-                Or enter with
+                다른 방법으로 로그인하기
               </span>
             </div>
           </div>
