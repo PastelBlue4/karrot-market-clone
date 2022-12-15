@@ -30,7 +30,7 @@ const Enter: NextPage = () => {
   };
 
   return (
-    <div className="px-4 mt-16 border">
+    <div className="px-4 mt-16 ">
       <h3 className="text-3xl font-bold text-center">캐럿마켓 로그인 </h3>
       <div className="mt-12">
         <div className="flex flex-col items-center">
