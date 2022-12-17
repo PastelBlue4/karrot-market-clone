@@ -25,9 +25,11 @@ const Enter: NextPage = () => {
     setMethod("phone");
   };
 
-  const onVaild = (data: EnterForm) => {
-    enter(data);
+  const onVaild = (validForm: EnterForm) => {
+    enter(validForm);
   };
+
+  console.log(loading, data, error);
 
   return (
     <div className="px-4 mt-16 ">
