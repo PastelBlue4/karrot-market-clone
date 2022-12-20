@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Button from "../components/button";
-import Input from "../components/input";
-import useMutation from "../libs/client/useMutation";
-import { cls } from "../libs/client/utils";
+import Button from "@components/button";
+import Input from "@components/input";
+import useMutation from "@libs/client/useMutation";
+import { cls } from "@libs/client/utils";
 
 interface EnterForm {
   email?: string;
@@ -13,7 +13,6 @@ interface EnterForm {
 
 const Enter: NextPage = () => {
   const [enter, { loading, data, error }] = useMutation("/api/users/enter");
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const { register, reset, handleSubmit } = useForm<EnterForm>();
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => {
@@ -28,8 +27,6 @@ const Enter: NextPage = () => {
   const onVaild = (validForm: EnterForm) => {
     enter(validForm);
   };
-
-  console.log(loading, data, error);
 
   return (
     <div className="px-4 mt-16 ">
@@ -87,14 +84,12 @@ const Enter: NextPage = () => {
           ) : null}
           {method === "email" ? (
             <Button
-              text={
-                isSubmitting ? "정보를 불러 오고있어요" : "로그인 링크 받기 "
-              }
+              text={loading ? "정보를 불러 오고있어요" : "로그인 링크 받기 "}
             />
           ) : null}
           {method === "phone" ? (
             <Button
-              text={isSubmitting ? "정보를 불러 오고있어요" : "인증문자 받기"}
+              text={loading ? "정보를 불러 오고있어요" : "인증문자 받기"}
             />
           ) : null}
         </form>
