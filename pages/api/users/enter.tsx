@@ -4,14 +4,28 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { phone, email } = req.body;
-  const loginTryType = phone ? { phone: +phone } : { email };
+  const payload = phone ? { phone: +phone } : { email };
 
   const user = await client.user.upsert({
     where: {
-      ...loginTryType,
+      ...payload,
     },
-    create: { name: "gest", ...loginTryType },
+    create: { name: "gest", ...payload },
     update: {},
+  });
+
+  const token = await client.token.create({
+    data: {
+      payload: "2232",
+      user: {
+        connectOrCreate: {
+          where: {
+            ...payload,
+          },
+          create: { name: "gest", ...payload },
+        },
+      },
+    },
   });
   console.log(user);
   return res.status(200).end();

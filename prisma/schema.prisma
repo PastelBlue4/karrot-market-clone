@@ -24,7 +24,7 @@ model User {
 
 model Token {
   id        Int      @id @default(autoincrement())
-  loginType String   @unique
+  payload String   @unique
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
   createdAt DateTime @default(now())
