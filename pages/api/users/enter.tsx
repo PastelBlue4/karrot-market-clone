@@ -1,6 +1,11 @@
+import mail from "@sendgrid/mail";
+
 import apiFetchHanlder from "@libs/server/apiFetchHandler";
 import client from "@libs/server/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import { emit } from "process";
+
+mail.setApiKey(process.env.SENDGRID_API_KEY!);
 
 interface ResponseType {
   ok: boolean;
@@ -29,6 +34,17 @@ async function handler(
       },
     },
   });
+
+  if (email) {
+    const email = await mail.send({
+      from: "pastelblue0721@gmail.com",
+      to: "pastel0721@naver.com",
+      subject: "캐럿마켓 인증 메일입니다.",
+      text: `인증키는 ${payload}입니다.`,
+    });
+    console.log(email);
+  }
+
   console.log(user);
   return res.status(200).end();
 }
