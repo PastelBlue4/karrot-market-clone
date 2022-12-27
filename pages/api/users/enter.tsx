@@ -17,10 +17,9 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   const { phone, email } = req.body;
-  const user = phone ? { phone: +phone } : { email };
-
+  const user = phone ? { phone } : email ? { email } : null;
+  if (!user) return res.status(400).json({ ok: false });
   const payload = Math.floor(100000 + Math.random() * 900000) + "";
-
   const token = await client.token.create({
     data: {
       payload,
@@ -36,17 +35,17 @@ async function handler(
   });
 
   if (email) {
-    const email = await mail.send({
-      from: "pastelblue0721@gmail.com",
-      to: "pastel0721@naver.com",
-      subject: "캐럿마켓 인증 메일입니다.",
-      text: `인증키는 ${payload}입니다.`,
-    });
-    console.log(email);
+    // const email = await mail.send({
+    //   from: "pastelblue0721@gmail.com",
+    //   to: "pastel0721@naver.com",
+    //   subject: "캐럿마켓 인증 메일입니다.",
+    //   text: `인증키는 ${payload}입니다.`,
+    // });
+    // console.log(email);
   }
 
   console.log(user);
-  return res.status(200).end();
+  return res.json({ ok: true });
 }
 
 export default apiFetchHanlder("POST", handler);

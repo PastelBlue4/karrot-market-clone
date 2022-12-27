@@ -14,7 +14,7 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   name      String
-  phone     Int?     @unique
+  phone     String?   @unique
   email     String?  @unique
   avatar    String?
   createdAt DateTime @default(now())
@@ -24,8 +24,8 @@ model User {
 
 model Token {
   id        Int      @id @default(autoincrement())
-  payload String   @unique
-  user      User     @relation(fields: [userId], references: [id])
+  payload   String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
