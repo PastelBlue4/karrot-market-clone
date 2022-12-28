@@ -45,10 +45,11 @@ const Enter: NextPage = () => {
 
   const onTokenVaild = (validForm: TokenForm) => {
     if (tokenLoading) return;
-    confirmToken(validForm);
+    {
+      confirmToken(validForm);
+      console.log(tokenData);
+    }
   };
-
-  console.log(data);
 
   return (
     <div className="px-4 mt-16 ">
