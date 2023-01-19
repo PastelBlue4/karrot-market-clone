@@ -1,6 +1,6 @@
 import mail from "@sendgrid/mail";
 
-import apiFetchHanlder from "@libs/server/apiFetchHandler";
+import withHandler from "@libs/server/withHandler";
 import client from "@libs/server/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { emit } from "process";
@@ -50,4 +50,4 @@ async function handler(
   return res.json({ ok: true });
 }
 
-export default apiFetchHanlder("POST", handler);
+export default withHandler("POST", handler);
