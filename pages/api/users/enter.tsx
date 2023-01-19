@@ -35,12 +35,12 @@ async function handler(
   });
 
   if (email) {
-    const email = await mail.send({
-      from: "pastelblue0721@gmail.com",
-      to: "pastel0721@naver.com",
-      subject: "캐럿마켓 인증 메일입니다.",
-      text: `인증키는 ${payload}입니다.`,
-    });
+    // const email = await mail.send({
+    //   from: "pastelblue0721@gmail.com",
+    //   to: "pastel0721@naver.com",
+    //   subject: "캐럿마켓 인증 메일입니다.",
+    //   text: `인증키는 ${payload}입니다.`,
+    // });
     console.log(email);
     console.log(payload);
   }
