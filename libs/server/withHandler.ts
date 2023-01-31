@@ -1,12 +1,13 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 
-type Method = "POST" | "GET" | "DELETE";
+export interface ResponseType {
+  ok: boolean;
+  [key: string]: any;
+}
 
-type receiveFnType = (req: NextApiRequest, res: NextApiResponse) => void;
-
-export default function apiFetchHanlder(
-  method: Method,
-  responseFn: receiveFnType
+export default function withHandler(
+  method: "GET" | "POST" | "DELETE",
+  fn: (req: NextApiRequest, res: NextApiResponse) => void
 ) {
   return async function (
     req: NextApiRequest,
@@ -16,7 +17,7 @@ export default function apiFetchHanlder(
       return res.status(405).end();
     }
     try {
-      await responseFn(req, res);
+      await fn(req, res);
     } catch (error) {
       console.log(error);
       return res.status(500).json({ error });

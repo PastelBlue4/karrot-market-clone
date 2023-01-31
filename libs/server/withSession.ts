@@ -1,6 +1,18 @@
-import { withIronSessionApiRoute } from "iron-session/next/dist";
+import { withIronSessionApiRoute } from "iron-session/next";
+
+declare module "iron-session" {
+  interface IronSessionData {
+    user?: {
+      id: number;
+    };
+  }
+}
 
 const cookieOptions = {
   cookieName: "carrotsession",
-  password: process.env.COOKIE_PASSWORD,
+  password: process.env.COOKIE_PASSWORD!,
 };
+
+export function withApiSession(fn: any) {
+  return withIronSessionApiRoute(fn, cookieOptions);
+}

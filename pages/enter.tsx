@@ -1,10 +1,11 @@
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "@components/button";
 import Input from "@components/input";
 import useMutation from "@libs/client/useMutation";
 import { cls } from "@libs/client/utils";
+import { Router, useRouter } from "next/router";
 
 interface EnterForm {
   email?: string;
@@ -51,6 +52,14 @@ const Enter: NextPage = () => {
     }
   };
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if (tokenData?.ok) {
+      router.push("/");
+    }
+  }, [tokenData, router]);
+
   return (
     <div className="px-4 mt-16 ">
       <h3 className="text-3xl font-bold text-center">캐럿마켓 로그인 </h3>
@@ -64,7 +73,7 @@ const Enter: NextPage = () => {
               <Input
                 register={tokenRegister("token")}
                 name="token"
-                label="인증번호를 입력해주세요.."
+                label="인증번호를 입력해주세요."
                 type="number"
                 required
               />
