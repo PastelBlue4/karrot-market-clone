@@ -31,14 +31,6 @@ const Enter: NextPage = () => {
   const { register: tokenRegister, handleSubmit: tokenHandleSubmit } =
     useForm<TokenForm>();
   const [method, setMethod] = useState<"email" | "phone">("email");
-  const onEmailClick = () => {
-    reset();
-    setMethod("email");
-  };
-  const onPhoneClick = () => {
-    reset();
-    setMethod("phone");
-  };
 
   const onVaild = (validForm: EnterForm) => {
     enter(validForm);
@@ -85,69 +77,24 @@ const Enter: NextPage = () => {
           </>
         ) : (
           <>
-            {" "}
             <div className="flex flex-col items-center">
               <h5 className="text-sm font-medium text-gray-500"></h5>
-              <div className="grid w-full grid-cols-2 mt-8 border-b ">
-                <button
-                  className={cls(
-                    "pb-4 font-medium text-sm border-b-2",
-                    method === "email"
-                      ? " border-orange-500 text-orange-400"
-                      : "border-transparent hover:text-gray-400 text-gray-500"
-                  )}
-                  onClick={onEmailClick}
-                >
-                  이메일로 로그인하기
-                </button>
-                <button
-                  className={cls(
-                    "pb-4 font-medium text-sm border-b-2",
-                    method === "phone"
-                      ? " border-orange-500 text-orange-400"
-                      : "border-transparent hover:text-gray-400 text-gray-500"
-                  )}
-                  onClick={onPhoneClick}
-                >
-                  휴대폰으로 로그인하기
-                </button>
-              </div>
+              <div className="grid w-full grid-cols-2 mt-8 border-b "></div>
             </div>
             <form
               className="flex flex-col mt-8 space-y-4"
               onSubmit={handleSubmit(onVaild)}
             >
-              {method === "email" ? (
-                <Input
-                  register={register("email")}
-                  name="email"
-                  label="이메일을 입력해주세요."
-                  type="email"
-                  required
-                />
-              ) : null}
-              {method === "phone" ? (
-                <Input
-                  name="phone"
-                  label="휴대폰 번호를 입력해 주세요."
-                  type="number"
-                  kind="phone"
-                  register={register("phone")}
-                  required
-                />
-              ) : null}
-              {method === "email" ? (
-                <Button
-                  text={
-                    loading ? "정보를 불러 오고있어요" : "로그인 링크 받기 "
-                  }
-                />
-              ) : null}
-              {method === "phone" ? (
-                <Button
-                  text={loading ? "정보를 불러 오고있어요" : "인증문자 받기"}
-                />
-              ) : null}
+              <Input
+                register={register("email")}
+                name="email"
+                label="이메일을 입력해주세요."
+                type="email"
+                required
+              />
+              <Button
+                text={loading ? "정보를 불러 오고있어요" : "로그인 링크 받기 "}
+              />
             </form>
           </>
         )}
