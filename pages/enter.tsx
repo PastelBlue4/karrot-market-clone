@@ -8,8 +8,7 @@ import { cls } from "@libs/client/utils";
 import { Router, useRouter } from "next/router";
 
 interface EnterForm {
-  email?: string;
-  phone?: string;
+  email: string;
 }
 
 interface TokenForm {
@@ -27,10 +26,9 @@ const Enter: NextPage = () => {
   const [confirmToken, { loading: tokenLoading, data: tokenData }] =
     useMutation<MutationResult>("/api/users/confirm");
 
-  const { register, reset, handleSubmit } = useForm<EnterForm>();
+  const { register, handleSubmit } = useForm<EnterForm>();
   const { register: tokenRegister, handleSubmit: tokenHandleSubmit } =
     useForm<TokenForm>();
-  const [method, setMethod] = useState<"email" | "phone">("email");
 
   const onVaild = (validForm: EnterForm) => {
     enter(validForm);

@@ -10,15 +10,35 @@ async function handler(
   const profile = await client.user.findUnique({
     where: { id: req.session.user?.id },
   });
+
+  const {
+    body: { name, price, description },
+    session: { user },
+  } = req;
+
+  const product = await client.product.create({
+    data: {
+      name,
+      price: +price,
+      description,
+      image: "xx",
+      user: {
+        connect: {
+          id: user?.id,
+        },
+      },
+    },
+  });
+
   res.json({
     ok: true,
-    profile,
+    product,
   });
 }
 
 export default withApiSession(
   withHandler({
-    method: "GET",
+    method: "POST",
     handler,
   })
 );
