@@ -3,11 +3,27 @@ import Button from "@components/button";
 import Input from "@components/input";
 import Layout from "@components/layout";
 import TextArea from "@components/textarea";
+import { useForm } from "react-hook-form";
+import useMutation from "@libs/client/useMutation";
+
+interface UploadProductForm {
+  name: string;
+  price: number;
+  description: string;
+}
 
 const Upload: NextPage = () => {
+  const { register, handleSubmit } = useForm<UploadProductForm>();
+  const [uploadProduct, { loading, data }] = useMutation("/api/products");
+
+  const onValid = (data: UploadProductForm) => {
+    if (loading) return;
+    uploadProduct(data);
+  };
+
   return (
-    <Layout canGoBack title="Upload Product">
-      <form className="p-4 space-y-4">
+    <Layout canGoBack title="내 물건 팔기">
+      <form className="p-4 space-y-" onSubmit={handleSubmit(onValid)}>
         <div>
           <label className="flex items-center justify-center w-full h-48 text-gray-600 border-2 border-gray-300 border-dashed rounded-md cursor-pointer hover:border-orange-500 hover:text-orange-500">
             <svg
@@ -27,17 +43,29 @@ const Upload: NextPage = () => {
             <input className="hidden" type="file" />
           </label>
         </div>
-        <Input required label="Name" name="name" type="text" />
         <Input
+          register={register("name")}
           required
-          label="Price"
-          placeholder="0.00"
-          name="price"
+          label="글 제목"
+          name="name"
           type="text"
+        />
+        <Input
+          register={register("price")}
+          required
+          label="가격"
+          placeholder="0.00"
+          name="가격"
+          type="number"
           kind="price"
         />
-        <TextArea name="description" label="Description" />
-        <Button text="Upload item" />
+
+        <TextArea
+          register={register("description")}
+          name="description"
+          label="게시글 내용을 작성해 주세요."
+        />
+        <Button text={loading ? "물건을 등록하는 중이에요." : "완료"} />
       </form>
     </Layout>
   );
