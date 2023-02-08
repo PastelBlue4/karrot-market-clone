@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         >
           <Component {...pageProps} />
         </SWRConfig>
-      </div>{" "}
+      </div>
     </div>
   );
 }

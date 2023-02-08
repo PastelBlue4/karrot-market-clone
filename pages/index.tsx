@@ -13,10 +13,7 @@ interface ProductResponse {
 
 const Home: NextPage = () => {
   const user = useUser();
-
-  const { data } = useSWR<ProductResponse>("/api/products");
-
-  console.log(data);
+  const { data, isLoading } = useSWR<ProductResponse>("/api/products");
   return (
     <Layout title="홈" hasTabBar>
       <div className="flex flex-col space-y-5 overflow-y-scroll ">
@@ -28,6 +25,7 @@ const Home: NextPage = () => {
             price={product.price}
             comments={1}
             hearts={1}
+            isLoading={isLoading}
           />
         ))}
         <FloatingButton href="/products/upload">
