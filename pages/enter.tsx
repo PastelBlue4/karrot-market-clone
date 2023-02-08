@@ -31,6 +31,7 @@ const Enter: NextPage = () => {
     useForm<TokenForm>();
 
   const onVaild = (validForm: EnterForm) => {
+    if (loading) return;
     enter(validForm);
   };
 
