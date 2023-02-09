@@ -26,14 +26,23 @@ export default function Item({
 }: ItemProps) {
   const [skeletonLoading, setSekeletonLoading] = useState(true);
 
-  const whenUpdate = (update: Date) => {
-    console.log(
-      new Date(updatedAt).toLocaleString("ko-KR"),
-      new Date().toLocaleString()
-    );
-  };
+  const getTimeAgo = (time: Date) => {
+    const now = new Date();
+    const updatedAt = new Date(time);
+    const elapsed = now.getTime() - updatedAt.getTime();
 
-  whenUpdate(updatedAt);
+    const seconds = Math.floor(elapsed / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) return `${days}일 전`;
+    if (hours > 0) return `${hours}시간 전`;
+    if (minutes > 0) return `${minutes}분 전`;
+    if (seconds > 0) return `${seconds}초 전`;
+
+    return "방금 전";
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -59,7 +68,7 @@ export default function Item({
               ) : (
                 <div className="">
                   <span>{tradingAddress}</span>
-                  <span className="ml-2">{`${updatedAt} 전`}</span>
+                  <span className="ml-2">{`${getTimeAgo(updatedAt)}`}</span>
                 </div>
               )}
             </h3>
