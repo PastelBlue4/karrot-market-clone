@@ -25,7 +25,7 @@ export default function Item({
   useEffect(() => {
     setTimeout(() => {
       setSekeletonLoading(false);
-    }, 2000);
+    }, 600);
   }, [isLoading]);
   return (
     <Link href={`/products/${id}`}>
@@ -50,7 +50,7 @@ export default function Item({
         <div className="flex items-end justify-end space-x-2">
           <div className="flex space-x-0.5 items-center text-sm  text-gray-600">
             {skeletonLoading ? (
-              <Skeleton width={30} />
+              <Skeleton width={40} />
             ) : (
               <>
                 <svg
@@ -73,7 +73,7 @@ export default function Item({
           </div>
           <div className="flex space-x-0.5 items-center text-sm  text-gray-600">
             {skeletonLoading ? (
-              <Skeleton width={30} />
+              <Skeleton width={40} />
             ) : (
               <>
                 <svg

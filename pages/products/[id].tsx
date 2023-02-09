@@ -18,7 +18,7 @@ const ItemDetail: NextPage = () => {
   useEffect(() => {
     setTimeout(() => {
       setSekeletonLoading(true);
-    }, 1000);
+    }, 500);
   }, [isLoading]);
 
   return (
