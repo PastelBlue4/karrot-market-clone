@@ -7,6 +7,8 @@ interface ItemProps {
   title: string;
   id: number;
   price: number;
+  tradingAddress: string;
+  updatedAt: Date;
   comments: number;
   hearts: number;
   isLoading: boolean;
@@ -16,11 +18,22 @@ export default function Item({
   title,
   price,
   comments,
+  tradingAddress,
+  updatedAt,
   hearts,
   id,
   isLoading,
 }: ItemProps) {
   const [skeletonLoading, setSekeletonLoading] = useState(true);
+
+  const whenUpdate = (update: Date) => {
+    console.log(
+      new Date(updatedAt).toLocaleString("ko-KR"),
+      new Date().toLocaleString()
+    );
+  };
+
+  whenUpdate(updatedAt);
 
   useEffect(() => {
     setTimeout(() => {
@@ -41,6 +54,14 @@ export default function Item({
               <div className="inline-flex">
                 {skeletonLoading ? <Skeleton width={100} /> : title}
               </div>
+              {skeletonLoading ? (
+                <Skeleton width={100} />
+              ) : (
+                <div className="">
+                  <span>{tradingAddress}</span>
+                  <span className="ml-2">{`${updatedAt} 전`}</span>
+                </div>
+              )}
             </h3>
             <span className="mt-1 font-medium text-gray-900">
               {skeletonLoading ? <Skeleton width={150} /> : `${price}원`}

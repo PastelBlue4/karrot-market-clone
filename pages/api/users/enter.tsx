@@ -1,11 +1,11 @@
-import mail from "@sendgrid/mail";
-
 import withHandler from "@libs/server/withHandler";
 import client from "@libs/server/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { emit } from "process";
 
-mail.setApiKey(process.env.SENDGRID_API_KEY!);
+const sendEmail = require("@sendgrid/mail");
+
+sendEmail.setApiKey(process.env.SENDGRID_API_KEY);
 
 interface ResponseType {
   ok: boolean;
@@ -17,9 +17,8 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   const { email } = req.body;
-
-  console.log(req.body);
-  const user = email;
+  const user = { email };
+  console.log(user);
   if (!user) return res.status(400).json({ ok: false });
   const payload = Math.floor(100000 + Math.random() * 900000) + "";
   const token = await client.token.create({
@@ -36,16 +35,19 @@ async function handler(
     },
   });
 
-  // const sendEmail = await mail.send({
-  //   from: "pastelblue0721@gmail.com",
-  //   to: "pastel0721@naver.com",
-  //   subject: "캐럿마켓 인증 메일입니다.",
-  //   text: `인증키는 ${payload}입니다.`,
-  // });
-  // console.log(sendEmail);
-  // console.log(payload);
-
-  // console.log(user);
+  await sendEmail
+    .send({
+      to: user,
+      from: "pastelblue0721@gmail.com",
+      subject: "캐럿마켓 인증 메일입니다.",
+      text: `인증번호는 ${payload} 입니다.`,
+    })
+    .then(() => {
+      console.log("Email sent");
+    })
+    .catch((error: any) => {
+      console.log(error);
+    });
 
   return res.json({ ok: true });
 }

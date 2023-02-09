@@ -13,6 +13,7 @@ interface UploadProductForm {
   name: string;
   price: number;
   description: string;
+  tradingAddress: string;
 }
 
 interface UploadProductMutation {
@@ -26,7 +27,6 @@ const Upload: NextPage = () => {
   const { register, handleSubmit } = useForm<UploadProductForm>();
   const [uploadProduct, { loading, data }] =
     useMutation<UploadProductMutation>("/api/products");
-
   const onValid = (data: UploadProductForm) => {
     if (loading) return;
     uploadProduct(data);
@@ -81,6 +81,12 @@ const Upload: NextPage = () => {
           register={register("description")}
           name="description"
           label="게시글 내용을 작성해 주세요."
+        />
+
+        <TextArea
+          register={register("tradingAddress")}
+          name="tradingAddress"
+          label="거래할 장소를 알려주세요."
         />
         <Button text={loading ? "물건을 등록하는 중이에요." : "완료"} />
       </form>

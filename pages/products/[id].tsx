@@ -49,6 +49,14 @@ const ItemDetail: NextPage = () => {
                 <p className="my-6 text-gray-700 ">
                   {skeletonLoading ? data?.product?.description : <Skeleton />}
                 </p>
+
+                <p className="my-6 text-gray-700 ">
+                  {skeletonLoading ? (
+                    data?.product?.tradingAddress
+                  ) : (
+                    <Skeleton />
+                  )}
+                </p>
                 <div className="flex items-center justify-between space-x-2">
                   <Button large text="판매자와 대화하기" />
                   <button className="flex items-center justify-center p-3 text-gray-400 rounded-md hover:bg-gray-100 hover:text-gray-500">

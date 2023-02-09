@@ -26,10 +26,12 @@ model User {
 model Token {
   id        Int      @id @default(autoincrement())
   payload   String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade,  onUpdate: Cascade)
   userId    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+   @@index([userId])
 }
 
 
@@ -37,11 +39,14 @@ model Product {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade )
   userId   Int 
+  tradingAddress  String? 
   image String
   name String
   price Int
   description String @db.MediumText
+
+  @@index([userId])
 }
 

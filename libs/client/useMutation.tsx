@@ -20,7 +20,6 @@ export default function useMutation<T = any>(
     setState((prev) => ({ ...prev, loading: true }));
     fetch(url, {
       method: "POST",
-
       headers: {
         "Content-Type": "application/json",
       },

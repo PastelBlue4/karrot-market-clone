@@ -12,7 +12,7 @@ async function handler(
   });
 
   const {
-    body: { name, price, description },
+    body: { name, price, description, tradingAddress },
     session: { user },
   } = req;
 
@@ -31,6 +31,7 @@ async function handler(
         price: +price,
         description,
         image: "xx",
+        tradingAddress,
         user: {
           connect: {
             id: user?.id,
