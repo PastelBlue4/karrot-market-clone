@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
@@ -51,80 +52,91 @@ export default function Item({
   }, [isLoading]);
   return (
     <Link href={`/products/${id}`}>
-      <div className="flex justify-between px-4 pt-5 cursor-pointer">
-        <div className="flex space-x-4">
-          {isLoading ? (
-            <Skeleton width={60} height={80} />
-          ) : (
-            <Skeleton width={80} height={80} />
-          )}
-          <div className="flex flex-col pt-2">
-            <h3 className="text-sm font-medium text-gray-900">
-              <div className="inline-flex">
-                {skeletonLoading ? <Skeleton width={100} /> : title}
+      <div className="box-border w-screen max-w-[560px]  ">
+        <div className="flex  justify-between px-1 py-2 cursor-pointer border-b-[1px] ">
+          <div className="flex transition-all">
+            {skeletonLoading ? (
+              <Skeleton width={160} height={160} />
+            ) : (
+              <div className="relative w-40 h-40 bg-green-200 rounded-lg">
+                <Image
+                  src={"/mokoko.png"}
+                  layout="fill"
+                  objectFit="contain"
+                  alt={`${id}`}
+                />
               </div>
-              {skeletonLoading ? (
-                <Skeleton width={100} />
-              ) : (
-                <div className="">
-                  <span>{tradingAddress}</span>
-                  <span className="ml-2">{`${getTimeAgo(updatedAt)}`}</span>
+            )}
+
+            <div className="flex flex-col justify-around ml-6">
+              <h3 className="text-gray-900 ">
+                <div className="text-xl bg-red-200 font-nomal">
+                  {skeletonLoading ? <Skeleton width={100} /> : title}
                 </div>
-              )}
-            </h3>
-            <span className="mt-1 font-medium text-gray-900">
-              {skeletonLoading ? <Skeleton width={150} /> : `${price}원`}
-            </span>
+              </h3>{" "}
+              <div className="text-sm text-gray-500">
+                {skeletonLoading ? (
+                  <Skeleton width={100} />
+                ) : (
+                  <>
+                    <span>{tradingAddress}</span>
+                    <span className="mx-2">•</span>
+                    <span className="">{`${getTimeAgo(updatedAt)}`}</span>
+                  </>
+                )}
+              </div>
+              <span className="font-medium text-gray-900 ">
+                {skeletonLoading ? <Skeleton width={150} /> : `${price} 원`}
+              </span>
+            </div>
           </div>
-        </div>
-        <div className="flex items-end justify-end space-x-2">
-          <div className="flex space-x-0.5 items-center text-sm  text-gray-600">
-            {skeletonLoading ? (
-              <Skeleton width={40} />
-            ) : (
-              <>
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  ></path>
-                </svg>
-                <span>{hearts}</span>
-              </>
-            )}
-          </div>
-          <div className="flex space-x-0.5 items-center text-sm  text-gray-600">
-            {skeletonLoading ? (
-              <Skeleton width={40} />
-            ) : (
-              <>
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+          <div className="flex items-end gap-2 mr-5">
+            <div className="flex items-center space-x-1 text-sm text-gray-600">
+              {skeletonLoading ? (
+                <Skeleton width={40} />
+              ) : (
+                <>
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    {comments}
-                  </path>
-                </svg>
-                <span>{hearts}</span>
-              </>
-            )}
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    ></path>
+                  </svg>
+                  <span>{hearts}</span>
+                </>
+              )}
+            </div>
+            <div className="flex items-center space-x-1 text-sm text-gray-600">
+              {skeletonLoading ? (
+                <Skeleton width={40} />
+              ) : (
+                <>
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                    ></path>
+                  </svg>
+                  <span>{comments}</span>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

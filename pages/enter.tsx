@@ -52,7 +52,7 @@ const Enter: NextPage = () => {
   }, [tokenData, router]);
 
   return (
-    <div className="px-4 mt-16 ">
+    <div className="px-4 mt-16 w-[576px] ">
       <h3 className="text-3xl font-bold text-center">캐럿마켓 로그인 </h3>
       <div className="mt-12">
         {data?.ok ? (

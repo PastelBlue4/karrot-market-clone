@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   const { data, isLoading } = useSWR<ProductResponse>("/api/products");
   return (
     <Layout title="홈" hasTabBar>
-      <div className="flex flex-col space-y-5 overflow-y-scroll ">
+      <div className="flex flex-col overflow-y-scroll ">
         {data?.products?.map((product) => (
           <Item
             id={product.id}

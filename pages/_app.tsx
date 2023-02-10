@@ -4,8 +4,8 @@ import { SWRConfig } from "swr";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="flex justify-center ">
-      <div className="min-w-[568px] max-w-xl h-auto">
+    <div className="flex justify-center w-screen ">
+      <div className="justify-center ">
         <SWRConfig
           value={{
             fetcher: (url: string) =>

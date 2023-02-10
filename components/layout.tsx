@@ -19,8 +19,8 @@ export default function Layout({
     router.back();
   };
   return (
-    <div className=" min-w-[384px] w-[576px]">
-      <div className="fixed top-0 flex items-center justify-center w-full h-12 max-w-xl px-10 overflow-y-scroll text-lg font-medium text-gray-800 bg-white border-b ">
+    <div className="">
+      <div className="fixed top-0 left-0 right-0 flex items-center justify-center w-full h-12 max-w-xl mx-auto overflow-y-scroll text-lg font-medium text-gray-800 bg-white border-b ">
         {canGoBack ? (
           <button onClick={onClick} className="absolute left-4">
             <svg
@@ -43,9 +43,16 @@ export default function Layout({
           <span className={cls(canGoBack ? "mx-auto" : "", "")}>{title}</span>
         ) : null}
       </div>
-      <div className={cls("pt-12", hasTabBar ? "pb-24" : "")}>{children}</div>
+      <div
+        className={cls(
+          "pt-12  box-border w-screen max-w-xl",
+          hasTabBar ? "pb-24" : ""
+        )}
+      >
+        {children}
+      </div>
       {hasTabBar ? (
-        <nav className="fixed bottom-0 flex justify-between w-full max-w-xl px-10 pt-3 pb-5 text-xs text-gray-700 bg-white border-t ">
+        <nav className="fixed bottom-0 left-0 right-0 flex justify-between w-full max-w-xl px-10 pt-3 pb-5 mx-auto text-xs text-gray-700 bg-white border-t min-w-max ">
           <Link href="/">
             <a
               className={cls(
