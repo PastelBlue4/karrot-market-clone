@@ -81,7 +81,7 @@ const ItemDetail: NextPage = () => {
             </div>
             <div>
               <h2 className="text-2xl font-bold text-gray-900">
-                Similar items
+                같이 본 물건들
               </h2>
               <div className="grid grid-cols-2 gap-4 mt-6 ">
                 {[1, 2, 3, 4, 5, 6].map((_, i) => (

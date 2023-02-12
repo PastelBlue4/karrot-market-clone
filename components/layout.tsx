@@ -45,7 +45,7 @@ export default function Layout({
       </div>
       <div
         className={cls(
-          "pt-12  box-border w-screen max-w-xl",
+          " pt-12 box-border w-screen max-w-xl",
           hasTabBar ? "pb-24" : ""
         )}
       >
