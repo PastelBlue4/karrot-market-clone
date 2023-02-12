@@ -52,25 +52,24 @@ export default function Item({
   }, [isLoading]);
   return (
     <Link href={`/products/${id}`}>
-      <div className="box-border w-screen max-w-[560px]  ">
-        <div className="flex  justify-between px-1 py-2 cursor-pointer border-b-[1px] ">
+      <div className="box-border w-screen max-w-[560px]">
+        <div className="flex  justify-between px-1 py-2  cursor-pointer border-b-[1px] ">
           <div className="flex transition-all">
-            {skeletonLoading ? (
-              <Skeleton width={160} height={160} />
-            ) : (
-              <div className="relative w-40 h-40 bg-green-200 rounded-lg">
+            <div className="relative w-40 h-40 bg-red-300 rounded-lg ">
+              {skeletonLoading ? (
+                <Skeleton width={160} height={160} className="-top-1" />
+              ) : (
                 <Image
                   src={"/mokoko.png"}
                   layout="fill"
                   objectFit="contain"
                   alt={`${id}`}
                 />
-              </div>
-            )}
-
+              )}
+            </div>
             <div className="flex flex-col justify-around ml-6">
               <h3 className="text-gray-900 ">
-                <div className="text-xl bg-red-200 font-nomal">
+                <div className="text-xl font-nomal">
                   {skeletonLoading ? <Skeleton width={100} /> : title}
                 </div>
               </h3>{" "}
@@ -86,14 +85,18 @@ export default function Item({
                 )}
               </div>
               <span className="font-medium text-gray-900 ">
-                {skeletonLoading ? <Skeleton width={150} /> : `${price} 원`}
+                {skeletonLoading ? (
+                  <Skeleton width={100} height={20} borderRadius="100" />
+                ) : (
+                  `${price} 원`
+                )}
               </span>
             </div>
           </div>
           <div className="flex items-end gap-2 mr-5">
             <div className="flex items-center space-x-1 text-sm text-gray-600">
               {skeletonLoading ? (
-                <Skeleton width={40} />
+                <Skeleton width={30} />
               ) : (
                 <>
                   <svg
@@ -116,7 +119,7 @@ export default function Item({
             </div>
             <div className="flex items-center space-x-1 text-sm text-gray-600">
               {skeletonLoading ? (
-                <Skeleton width={40} />
+                <Skeleton width={30} />
               ) : (
                 <>
                   <svg
