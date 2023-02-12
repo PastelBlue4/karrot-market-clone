@@ -55,7 +55,7 @@ export default function Item({
       <div className="box-border w-screen max-w-[560px]">
         <div className="flex  justify-between px-1 py-2  cursor-pointer border-b-[1px] ">
           <div className="flex transition-all">
-            <div className="relative w-40 h-40 bg-red-300 rounded-lg ">
+            <div className="relative w-40 h-40 ">
               {skeletonLoading ? (
                 <Skeleton width={160} height={160} className="-top-1" />
               ) : (
@@ -64,13 +64,14 @@ export default function Item({
                   layout="fill"
                   objectFit="contain"
                   alt={`${id}`}
+                  className="rounded-lg bg-green-50"
                 />
               )}
             </div>
             <div className="flex flex-col justify-around ml-6">
               <h3 className="text-gray-900 ">
-                <div className="text-xl font-nomal">
-                  {skeletonLoading ? <Skeleton width={100} /> : title}
+                <div className="text-xl font-nomal ">
+                  {skeletonLoading ? <Skeleton width={130} /> : title}
                 </div>
               </h3>{" "}
               <div className="text-sm text-gray-500">
