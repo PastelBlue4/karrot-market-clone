@@ -7,11 +7,22 @@ import Link from "next/link";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useEffect, useState } from "react";
+import { Product, User } from "@prisma/client";
+
+interface ProductWithUser extends Product {
+  user: User;
+}
+
+interface ItemDetailResponse {
+  ok: boolean;
+  product: ProductWithUser;
+  productRelation: Product[];
+}
 
 const ItemDetail: NextPage = () => {
   const [skeletonLoading, setSekeletonLoading] = useState(false);
   const router = useRouter();
-  const { data, isLoading } = useSWR(
+  const { data, isLoading } = useSWR<ItemDetailResponse>(
     router.query.id ? `/api/products/${router.query.id}` : null
   );
 
@@ -21,6 +32,7 @@ const ItemDetail: NextPage = () => {
     }, 500);
   }, [isLoading]);
 
+  console.log(data?.productRelation);
   return (
     <>
       <Layout canGoBack>
@@ -84,15 +96,19 @@ const ItemDetail: NextPage = () => {
                 같이 본 물건들
               </h2>
               <div className="grid grid-cols-2 gap-4 mt-6 ">
-                {[1, 2, 3, 4, 5, 6].map((_, i) => (
-                  <div key={i}>
-                    <div className="w-full h-56 mb-4 bg-slate-300" />
-                    <h3 className="-mb-1 text-gray-700">Galaxy S60</h3>
-                    <span className="text-sm font-medium text-gray-900">
-                      $6
-                    </span>
-                  </div>
-                ))}
+                {data?.productRelation?.map((item, id) => {
+                  return (
+                    <Link key={id} href={`/products/${item.id}`}>
+                      <div className="cursor-pointer">
+                        <div className="w-full h-56 mb-4 bg-slate-300" />
+                        <h3 className="-mb-1 text-gray-700">{item.name}</h3>
+                        <span className="text-sm font-medium text-gray-900">
+                          {item.price}원
+                        </span>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>

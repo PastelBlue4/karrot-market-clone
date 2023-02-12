@@ -1,7 +1,7 @@
 import withHandler from "@libs/server/withHandler";
 import client from "@libs/server/client";
 import { NextApiRequest, NextApiResponse } from "next";
-import { emit } from "process";
+
 
 const sendEmail = require("@sendgrid/mail");
 
