@@ -37,6 +37,7 @@ async function handler(
         },
       },
     },
+    take: 4,
   });
 
   console.log(productRelationTerm);
