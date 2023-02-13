@@ -8,6 +8,8 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useEffect, useState } from "react";
 import { Product, User } from "@prisma/client";
+import useMutation from "@libs/client/useMutation";
+import { cls } from "@libs/client/utils";
 
 interface ProductWithUser extends Product {
   user: User;
@@ -17,6 +19,7 @@ interface ItemDetailResponse {
   ok: boolean;
   product: ProductWithUser;
   productRelation: Product[];
+  isFavorite: boolean;
 }
 
 const ItemDetail: NextPage = () => {
@@ -25,6 +28,12 @@ const ItemDetail: NextPage = () => {
   const { data, isLoading } = useSWR<ItemDetailResponse>(
     router.query.id ? `/api/products/${router.query.id}` : null
   );
+
+  const [toggleFav] = useMutation(`/api/products/${router.query.id}/favorite`);
+
+  const onFavoriteClick = () => {
+    toggleFav({});
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -71,7 +80,15 @@ const ItemDetail: NextPage = () => {
                 </p>
                 <div className="flex items-center justify-between space-x-2">
                   <Button large text="판매자와 대화하기" />
-                  <button className="flex items-center justify-center p-3 text-gray-400 rounded-md hover:bg-gray-100 hover:text-gray-500">
+                  <button
+                    onClick={onFavoriteClick}
+                    className={cls(
+                      "flex items-center justify-center p-3 rounded-md  hover:bg-gray-100 ",
+                      data?.isFavorite
+                        ? "text-red-500 hover:text-gray-500 hover:bg-gray-200"
+                        : "text-gray-400  hover:text-red-500 hover:bg-red-100"
+                    )}
+                  >
                     <svg
                       className="w-6 h-6 "
                       xmlns="http://www.w3.org/2000/svg"
