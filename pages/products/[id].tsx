@@ -25,15 +25,29 @@ interface ItemDetailResponse {
 const ItemDetail: NextPage = () => {
   const [skeletonLoading, setSekeletonLoading] = useState(false);
   const router = useRouter();
-  const { data, isLoading } = useSWR<ItemDetailResponse>(
+  const { data, isLoading, mutate } = useSWR<any>(
     router.query.id ? `/api/products/${router.query.id}` : null
   );
 
   const [toggleFav] = useMutation(`/api/products/${router.query.id}/favorite`);
 
   const onFavoriteClick = () => {
-    toggleFav({});
+    mutate(
+      {
+        ...data,
+        product: {
+          ...data.product,
+          user: {
+            ...data.product.user,
+            name: "Yasuo, The scientist of the world ",
+          },
+        },
+      },
+      false
+    );
   };
+
+  // toggleFav({});
 
   useEffect(() => {
     setTimeout(() => {

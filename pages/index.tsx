@@ -24,7 +24,9 @@ const Home: NextPage = () => {
             title={product.name}
             price={product.price}
             updatedAt={product.updatedAt}
-            tradingAddress={product.tradingAddress}
+            tradingAddress={
+              product.tradingAddress ? product.tradingAddress : ""
+            }
             comments={1}
             hearts={1}
             isLoading={isLoading}
