@@ -32,19 +32,19 @@ const ItemDetail: NextPage = () => {
   const [toggleFav] = useMutation(`/api/products/${router.query.id}/favorite`);
 
   const onFavoriteClick = () => {
-    mutate(
-      {
-        ...data,
-        product: {
-          ...data.product,
-          user: {
-            ...data.product.user,
-            name: "Yasuo, The scientist of the world ",
-          },
-        },
-      },
-      false
-    );
+    // mutate(
+    //   {
+    //     ...data,
+    //     product: {
+    //       ...data.product,
+    //       user: {
+    //         ...data.product.user,
+    //         name: "Yasuo, The scientist of the world ",
+    //       },
+    //     },
+    //   },
+    //   false
+    // );
   };
 
   // toggleFav({});

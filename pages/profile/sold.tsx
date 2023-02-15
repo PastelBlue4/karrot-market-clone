@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import Item from "@components/products";
+import Item from "@components/item";
 import Layout from "@components/layout";
 
 const Sold: NextPage = () => {
@@ -14,6 +14,9 @@ const Sold: NextPage = () => {
             price={99}
             comments={1}
             hearts={1}
+            tradingAddress="언젠간~"
+            updatedAt={new Date("2022-03-12")}
+            isLoading={false}
           />
         ))}
       </div>

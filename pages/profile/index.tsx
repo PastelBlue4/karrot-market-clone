@@ -1,20 +1,30 @@
 import type { NextPage } from "next";
 import Link from "next/link";
 import Layout from "@components/layout";
+import useUser from "@libs/client/useUser";
+import KarrotPay from "@components/karrotPay";
 
 const Profile: NextPage = () => {
+  const user = useUser();
   return (
     <Layout hasTabBar title="나의 캐럿">
-      <div className="px-4">
-        <div className="flex items-center mt-4 space-x-3">
-          <div className="w-16 h-16 rounded-full bg-slate-500" />
-          <div className="flex flex-col">
-            <span className="font-medium text-gray-900">Steve Jebs</span>
-            <Link href="/profile/edit">
-              <a className="text-sm text-gray-700">Edit profile &rarr;</a>
-            </Link>
+      <div className="px-4 ">
+        <div className="flex items-center my-6 space-x-3 ">
+          <div>
+            <div className="w-10 h-10 rounded-full bg-slate-500" />
+          </div>
+          <div className="flex items-center justify-between w-full ">
+            <span className="text-2xl font-medium text-gray-900">
+              {user?.user?.name}
+            </span>
+            <button className="px-3.5 py-2.5 text-xs font-normal bg-gray-100 rounded-md">
+              프로필 보기
+            </button>
           </div>
         </div>
+
+        <KarrotPay />
+
         <div className="flex justify-around mt-10">
           <Link href="/profile/sold">
             <a className="flex flex-col items-center">
@@ -85,71 +95,6 @@ const Profile: NextPage = () => {
               </span>
             </a>
           </Link>
-        </div>
-        <div className="mt-12">
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 rounded-full bg-slate-500" />
-            <div>
-              <h4 className="text-sm font-bold text-gray-800">니꼬</h4>
-              <div className="flex items-center">
-                <svg
-                  className="w-5 h-5 text-yellow-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                <svg
-                  className="w-5 h-5 text-yellow-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                <svg
-                  className="w-5 h-5 text-yellow-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                <svg
-                  className="w-5 h-5 text-yellow-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-                <svg
-                  className="w-5 h-5 text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div className="mt-4 text-sm text-gray-600">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-              aliquid hic neque rem et dicta ut aliquam repellat dolor impedit
-              animi, maxime adipisci provident autem accusamus atque voluptates
-              nisi eius. hic neque rem et dicta ut aliquam repellat dolor
-              impedit animi, maxime adipisci provident autem accusamus atque
-              voluptates nisi eius.
-            </p>
-          </div>
         </div>
       </div>
     </Layout>
