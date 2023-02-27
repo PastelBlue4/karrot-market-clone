@@ -1,9 +1,7 @@
 # karrot Market Clone :)
 
 
-## File Directory
 
-<hr/>
 
 ## Project PreView
 
@@ -23,9 +21,5 @@ https://user-images.githubusercontent.com/91403380/221466181-d669fa20-f730-43da-
 
 
 ![스크린샷 2023-02-09 오후 11 38 48](https://user-images.githubusercontent.com/91403380/221466157-44ca568c-2345-4e1e-a9f3-c4fba950057e.png)
-
-<hr/>
-
-## Core Source Code
 
 <hr/>
