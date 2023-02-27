@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Button from "@components/button";
 import Layout from "@components/layout";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
@@ -25,29 +25,18 @@ interface ItemDetailResponse {
 const ItemDetail: NextPage = () => {
   const [skeletonLoading, setSekeletonLoading] = useState(false);
   const router = useRouter();
-  const { data, isLoading, mutate } = useSWR<any>(
+
+  const { data, isLoading, mutate } = useSWR<ItemDetailResponse>(
     router.query.id ? `/api/products/${router.query.id}` : null
   );
 
   const [toggleFav] = useMutation(`/api/products/${router.query.id}/favorite`);
 
   const onFavoriteClick = () => {
-    // mutate(
-    //   {
-    //     ...data,
-    //     product: {
-    //       ...data.product,
-    //       user: {
-    //         ...data.product.user,
-    //         name: "Yasuo, The scientist of the world ",
-    //       },
-    //     },
-    //   },
-    //   false
-    // );
+    toggleFav({});
+    if (!data) return;
+    mutate({ ...data, isFavorite: !data.isFavorite }, false);
   };
-
-  // toggleFav({});
 
   useEffect(() => {
     setTimeout(() => {
@@ -55,7 +44,6 @@ const ItemDetail: NextPage = () => {
     }, 500);
   }, [isLoading]);
 
-  console.log(data?.productRelation);
   return (
     <>
       <Layout canGoBack>

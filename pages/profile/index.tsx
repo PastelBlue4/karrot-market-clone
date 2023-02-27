@@ -3,6 +3,7 @@ import Link from "next/link";
 import Layout from "@components/layout";
 import useUser from "@libs/client/useUser";
 import KarrotPay from "@components/karrotPay";
+import { useState } from "react";
 
 const Profile: NextPage = () => {
   const user = useUser();

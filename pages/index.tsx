@@ -4,11 +4,11 @@ import Item from "@components/item";
 import Layout from "@components/layout";
 import useUser from "@libs/client/useUser";
 import useSWR from "swr";
-import { Product } from "@prisma/client";
+import { Favorite, Product } from "@prisma/client";
 
 interface ProductResponse {
   ok: boolean;
-  products: Product[];
+  products: (Product & { _count: { favorites: number } })[];
 }
 
 const Home: NextPage = () => {
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
               product.tradingAddress ? product.tradingAddress : ""
             }
             comments={1}
-            hearts={1}
+            hearts={product._count.favorites}
             isLoading={isLoading}
           />
         ))}
