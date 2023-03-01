@@ -20,7 +20,7 @@ export default function Layout({
   };
   return (
     <div className="">
-      <div className="fixed top-0 left-0 right-0 flex items-center justify-center w-full h-12 max-w-xl mx-auto overflow-y-scroll text-lg font-medium text-gray-800 bg-white border-b ">
+      <div className="fixed top-0 left-0 right-0 z-10 flex items-center justify-center w-full h-12 max-w-xl mx-auto overflow-y-scroll text-lg font-medium text-gray-800 bg-white border-b ">
         {canGoBack ? (
           <button onClick={onClick} className="absolute left-4">
             <svg
@@ -52,7 +52,7 @@ export default function Layout({
         {children}
       </div>
       {hasTabBar ? (
-        <nav className="fixed bottom-0 left-0 right-0 flex justify-between w-full max-w-xl px-10 pt-3 pb-5 mx-auto text-xs text-gray-700 bg-white border-t min-w-max ">
+        <nav className="fixed bottom-0 left-0 right-0 z-10 flex justify-between w-full max-w-xl px-10 pt-3 pb-5 mx-auto text-xs text-gray-700 bg-white border-t min-w-max ">
           <Link href="/">
             <a
               className={cls(

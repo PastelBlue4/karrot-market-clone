@@ -5,7 +5,7 @@ import useUser from "@libs/client/useUser";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="flex justify-center w-screen ">
+    <div className="flex justify-center ">
       <div className="justify-center ">
         <SWRConfig
           value={{
