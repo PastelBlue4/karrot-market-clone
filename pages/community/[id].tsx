@@ -73,7 +73,7 @@ const CommunityPostDetail: NextPage = () => {
       </div>
       <div className="px-4">
         <textarea
-          className="w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-orange-500 focus:border-orange-500 "
+          className="w-full mt-1 border-gray-300 rounded-md shadow-sm resize-none focus:ring-orange-500 focus:border-orange-500 "
           rows={4}
           placeholder="Answer this question!"
         />
