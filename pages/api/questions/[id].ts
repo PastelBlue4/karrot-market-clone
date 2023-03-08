@@ -22,6 +22,12 @@ async function handler(
           avatar: true,
         },
       },
+      _count: {
+        select: {
+          answers: true,
+          interests: true,
+        },
+      },
     },
   });
 

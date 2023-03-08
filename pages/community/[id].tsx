@@ -7,6 +7,10 @@ import useSWR from "swr";
 
 interface QestionAuthor extends Question {
   user: User;
+  _count: {
+    answers: number;
+    interests: number;
+  };
 }
 
 interface QuestionResponse {
@@ -64,8 +68,8 @@ const CommunityPostDetail: NextPage = () => {
           <div className="mt-2 mtext-gray-700 ">
             <span>{data?.question.contents}</span>
           </div>
-          <div className="flex justify-between w-full px-1 py-4 mt-3 text-gray-700 border-y">
-            <div className="flex justify-center mx-1 bg-red-300 w-28">
+          <div className="flex justify-between w-full px-1 py-1 mt-3 text-gray-700 border-y">
+            <div className="flex justify-center mx-1 w-28">
               <span className="flex items-center space-x-2 w-22 ">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -82,31 +86,11 @@ const CommunityPostDetail: NextPage = () => {
                   />
                 </svg>
 
-                <span>공감하기 1</span>
-              </span>
-            </div>
-            <div className="flex justify-center mx-1 bg-red-300 w-28">
-              <span className="flex items-center space-x-2 w-22 ">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-5 h-5 scale-x-[-1]  text-gray-400"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"
-                  />
-                </svg>
-
-                <span>답변 1</span>
+                <span>답변 {data?.question._count.answers}</span>
               </span>
             </div>
 
-            <div className="flex justify-center mx-1 bg-red-300 w-28">
+            <div className="flex justify-center mx-1 w-28">
               {" "}
               <span className="flex items-center space-x-2 w-22">
                 <svg
@@ -124,7 +108,7 @@ const CommunityPostDetail: NextPage = () => {
                   />
                 </svg>
 
-                <span>관심 1</span>
+                <span>관심 {data?.question._count.interests}</span>
               </span>
             </div>
           </div>

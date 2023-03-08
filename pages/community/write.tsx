@@ -26,7 +26,6 @@ const Write: NextPage = () => {
   const onValid = (data: WriteForm) => {
     if (loading) return;
     question(data);
-    console.log(data);
   };
   useEffect(() => {
     if (data && data.ok) {
