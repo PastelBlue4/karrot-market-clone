@@ -1,9 +1,13 @@
 import Layout from "@components/layout";
-import { Question, User } from "@prisma/client";
+import { Answer, Question, User } from "@prisma/client";
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
+
+interface AnswerWithUser extends Answer {
+  user: User;
+}
 
 interface QuestionAuthor extends Question {
   user: User;
@@ -11,6 +15,7 @@ interface QuestionAuthor extends Question {
     answers: number;
     interests: number;
   };
+  answers: AnswerWithUser[];
 }
 
 interface QuestionResponse {
@@ -118,7 +123,7 @@ const CommunityPostDetail: NextPage = () => {
             <div className="w-8 h-8 rounded-full bg-slate-200" />
             <div>
               <span className="block text-sm font-medium text-gray-700">
-                Steve Jebs
+                {data?.question.answers.user.id}
               </span>
               <span className="block text-xs text-gray-500 ">2시간 전</span>
               <p className="mt-2 text-gray-700">
