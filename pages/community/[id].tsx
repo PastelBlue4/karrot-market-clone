@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 
-interface QestionAuthor extends Question {
+interface QuestionAuthor extends Question {
   user: User;
   _count: {
     answers: number;
@@ -15,7 +15,7 @@ interface QestionAuthor extends Question {
 
 interface QuestionResponse {
   ok: boolean;
-  question: QestionAuthor;
+  question: QuestionAuthor;
 }
 
 const CommunityPostDetail: NextPage = () => {
@@ -49,7 +49,7 @@ const CommunityPostDetail: NextPage = () => {
           질문
         </span>
         <div className="flex flex-col pb-3 mx-4 mb-3 cursor-pointer">
-          <Link href={`/users/profiles/${data?.question.user.id}`}>
+          <Link href={``}>
             <div className="flex">
               <div className="flex ">
                 <div className="rounded-full w-11 h-11 bg-slate-300" />

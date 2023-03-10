@@ -28,6 +28,20 @@ async function handler(
           interests: true,
         },
       },
+      answers: {
+        select: {
+          contents: true,
+          createdAt: true,
+          id: true,
+          user: {
+            select: {
+              name: true,
+              id: true,
+              avatar: true,
+            },
+          },
+        },
+      },
     },
   });
 
