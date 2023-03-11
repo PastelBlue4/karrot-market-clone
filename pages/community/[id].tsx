@@ -15,7 +15,7 @@ interface QuestionAuthor extends Question {
     answers: number;
     interests: number;
   };
-  answers: AnswerWithUser[];
+  answers?: AnswerWithUser[];
 }
 
 interface QuestionResponse {
@@ -119,18 +119,22 @@ const CommunityPostDetail: NextPage = () => {
           </div>
         </div>
         <div className="px-4 my-5 space-y-5">
-          <div className="flex items-start space-x-3">
-            <div className="w-8 h-8 rounded-full bg-slate-200" />
-            <div>
-              <span className="block text-sm font-medium text-gray-700">
-                {data?.question.answers.user.id}
-              </span>
-              <span className="block text-xs text-gray-500 ">2시간 전</span>
-              <p className="mt-2 text-gray-700">
-                The best mandu restaurant is the one next to my house.
-              </p>
-            </div>
-          </div>
+          {data?.ok &&
+            data.question.answers &&
+            data.question.answers.map((answer) => (
+              <div key={answer.id} className="flex items-start space-x-3">
+                <div className="w-8 h-8 rounded-full bg-slate-200" />
+                <div>
+                  <span className="block text-sm font-medium text-gray-700">
+                    {answer.user.name}
+                  </span>
+                  <span className="block text-xs text-gray-500 ">
+                    {getTimeAgo(answer.createdAt)}
+                  </span>
+                  <p className="mt-2 text-gray-700">{answer.contents} </p>
+                </div>
+              </div>
+            ))}
         </div>
         <div className="px-4">
           <textarea
