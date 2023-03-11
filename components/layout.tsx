@@ -157,7 +157,7 @@ export default function Layout({
               <span>라이브</span>
             </a>
           </Link>
-          <Link href="/profile">
+          <Link href="/users/profiles">
             <a
               className={cls(
                 "flex flex-col items-center space-y-2 ",

@@ -4,7 +4,7 @@ import FloatingButton from "@components/floating-button";
 
 const Community: NextPage = () => {
   return (
-    <Layout hasTabBar title="community">
+    <Layout hasTabBar title="동네생활">
       <div>
         <div>
           <span>동네질문</span>

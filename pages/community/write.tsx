@@ -33,12 +33,12 @@ const Write: NextPage = () => {
     }
   }, [data, router]);
   return (
-    <Layout canGoBack title="Write Post">
+    <Layout canGoBack title="게시글 올리기">
       <form onSubmit={handleSubmit(onValid)} className="p-4 space-y-4">
         <TextArea
           register={register("contents", { required: true, minLength: 10 })}
           required
-          placeholder="Ask a question!"
+          placeholder="궁금한 내용을 올려보세요!"
         />
         <Button text={loading ? "게시글을 올리고 있어요." : " 게시글 올리기"} />
       </form>
