@@ -9,7 +9,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useEffect, useState } from "react";
 import { Product, User } from "@prisma/client";
 import useMutation from "@libs/client/useMutation";
-import { cls } from "@libs/client/utils";
+import { classNameHandler } from "@libs/client/utils";
 
 interface ProductWithUser extends Product {
   user: User;
@@ -84,7 +84,7 @@ const ItemDetail: NextPage = () => {
                   <Button large text="판매자와 대화하기" />
                   <button
                     onClick={onFavoriteClick}
-                    className={cls(
+                    className={classNameHandler(
                       "flex items-center justify-center p-3 rounded-md  hover:bg-gray-100 ",
                       data?.isFavorite
                         ? "text-red-500 hover:text-gray-500 hover:bg-gray-200"

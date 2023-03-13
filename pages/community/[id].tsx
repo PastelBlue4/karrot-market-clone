@@ -1,4 +1,6 @@
 import Layout from "@components/layout";
+import useMutation from "@libs/client/useMutation";
+import { classNameHandler } from "@libs/client/utils";
 import { Answer, Question, User } from "@prisma/client";
 import type { NextPage } from "next";
 import Link from "next/link";
@@ -21,13 +23,37 @@ interface QuestionAuthor extends Question {
 interface QuestionResponse {
   ok: boolean;
   question: QuestionAuthor;
+  isInterest: boolean;
 }
 
 const CommunityPostDetail: NextPage = () => {
   const router = useRouter();
-  const { data, error } = useSWR<QuestionResponse>(
+  const { data, mutate } = useSWR<QuestionResponse>(
     router.query.id ? `/api/questions/${router.query.id}` : null
   );
+
+  const [interest] = useMutation(`/api/questions/${router.query.id}/interest`);
+
+  const onInterestHandler = () => {
+    if (!data) return;
+    mutate(
+      {
+        ...data,
+        question: {
+          ...data?.question,
+          _count: {
+            ...data?.question._count,
+            interests: data.isInterest
+              ? data?.question._count.interests - 1
+              : data?.question._count.interests + 1,
+          },
+        },
+        isInterest: !data.isInterest,
+      },
+      false
+    );
+    interest({});
+  };
 
   const getTimeAgo = (time: Date) => {
     const now = new Date();
@@ -97,14 +123,23 @@ const CommunityPostDetail: NextPage = () => {
 
             <div className="flex justify-center mx-1 w-28">
               {" "}
-              <span className="flex items-center space-x-2 w-22">
+              <button
+                onClick={onInterestHandler}
+                className={classNameHandler(
+                  "flex items-center space-x-2 w-22",
+                  data?.isInterest ? "text-orange-500" : ""
+                )}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-5 h-5 text-gray-400"
+                  className={classNameHandler(
+                    "w-5 h-5",
+                    data?.isInterest ? "text-orange-500" : "text-gray-400"
+                  )}
                 >
                   <path
                     strokeLinecap="round"
@@ -114,7 +149,7 @@ const CommunityPostDetail: NextPage = () => {
                 </svg>
 
                 <span>관심 {data?.question._count.interests}</span>
-              </span>
+              </button>
             </div>
           </div>
         </div>

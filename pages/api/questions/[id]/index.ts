@@ -45,9 +45,22 @@ async function handler(
     },
   });
 
+  const isInterest = Boolean(
+    await client.interest.findFirst({
+      where: {
+        questionId: +id.toString(),
+        userId: user?.id,
+      },
+      select: {
+        id: true,
+      },
+    })
+  );
+
   res.json({
     ok: true,
     question,
+    isInterest,
   });
 }
 

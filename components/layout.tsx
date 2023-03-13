@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { cls } from "@libs/client/utils";
+import { classNameHandler } from "@libs/client/utils";
 import { useRouter } from "next/router";
 interface LayoutProps {
   title?: string;
@@ -40,11 +40,13 @@ export default function Layout({
           </button>
         ) : null}
         {title ? (
-          <span className={cls(canGoBack ? "mx-auto" : "", "")}>{title}</span>
+          <span className={classNameHandler(canGoBack ? "mx-auto" : "", "")}>
+            {title}
+          </span>
         ) : null}
       </div>
       <div
-        className={cls(
+        className={classNameHandler(
           " pt-12 box-border w-screen max-w-xl",
           hasTabBar ? "pb-24" : ""
         )}
@@ -55,7 +57,7 @@ export default function Layout({
         <nav className="fixed bottom-0 left-0 right-0 z-10 flex justify-between w-full max-w-xl px-10 pt-3 pb-5 mx-auto text-xs text-gray-700 bg-white border-t min-w-max ">
           <Link href="/">
             <a
-              className={cls(
+              className={classNameHandler(
                 "flex flex-col items-center space-y-2 ",
                 router.pathname === "/"
                   ? "text-orange-500"
@@ -81,7 +83,7 @@ export default function Layout({
           </Link>
           <Link href="/community">
             <a
-              className={cls(
+              className={classNameHandler(
                 "flex flex-col items-center space-y-2 ",
                 router.pathname === "/community"
                   ? "text-orange-500"
@@ -107,7 +109,7 @@ export default function Layout({
           </Link>
           <Link href="/chats">
             <a
-              className={cls(
+              className={classNameHandler(
                 "flex flex-col items-center space-y-2 ",
                 router.pathname === "/chats"
                   ? "text-orange-500"
@@ -133,7 +135,7 @@ export default function Layout({
           </Link>
           <Link href="/live">
             <a
-              className={cls(
+              className={classNameHandler(
                 "flex flex-col items-center space-y-2 ",
                 router.pathname === "/live"
                   ? "text-orange-500"
@@ -159,7 +161,7 @@ export default function Layout({
           </Link>
           <Link href="/users/profiles">
             <a
-              className={cls(
+              className={classNameHandler(
                 "flex flex-col items-center space-y-2 ",
                 router.pathname === "/profile"
                   ? "text-orange-500"
