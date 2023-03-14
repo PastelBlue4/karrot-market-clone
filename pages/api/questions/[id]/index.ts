@@ -12,6 +12,12 @@ async function handler(
     session: { user },
   } = req;
 
+  if (!id) {
+    return res.json({
+      ok: false,
+    });
+  }
+
   const question = await client.question.findUnique({
     where: { id: Number(id) },
     include: {

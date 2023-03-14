@@ -12,6 +12,12 @@ async function handler(
     session: { user },
   } = req;
 
+  if (!id) {
+    return res.json({
+      ok: false,
+    });
+  }
+
   const isInterest = await client.interest.findFirst({
     where: {
       userId: user?.id,
