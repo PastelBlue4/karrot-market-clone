@@ -85,8 +85,9 @@ const CommunityPostDetail: NextPage = () => {
   useEffect(() => {
     if (answerData && answerData.ok) {
       reset({ answer: "" });
+      mutate();
     }
-  }, [answerData, reset]);
+  }, [answerData, reset, mutate]);
 
   const getTimeAgo = (time: Date) => {
     const now = new Date();
