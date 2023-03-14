@@ -6,6 +6,9 @@ import Link from "next/link";
 import { Question, User } from "@prisma/client";
 import { getLocalDateString, getTimeAgo } from "@libs/client/utils";
 
+import { AiOutlineHeart } from "react-icons/ai";
+import { BsChat, BsHeart } from "react-icons/bs";
+
 interface QuestionsWithUser extends Question {
   user: User;
   _count: {
@@ -24,56 +27,42 @@ const Community: NextPage = () => {
 
   return (
     <Layout hasTabBar title="동네생활">
-      <div>
+      <div className="flex justify-center w-full">
+        <div className="w-11/12 bg-green-100 rounded-lg h-28"></div>
+      </div>
+      <div className="">
         {data &&
           data?.questions.map((question) => (
             <Link key={question.id} href={`/community/${question.id}`}>
-              <a className="flex flex-col items-start pt-4 cursor-pointer">
-                <div className="px-4 mt-2 text-gray-700">
-                  <span className="font-medium text-orange-500">Q.</span>{" "}
+              <div className="flex flex-col items-start justify-center py-2 border-t cursor-pointer first:mt-2 ">
+                <div className="px-2 mt-2 text-lg text-gray-700 ">
                   {question.contents}
                 </div>
-                <div className="flex items-center justify-between w-full px-4 mt-5 text-xs font-medium text-gray-500">
-                  <span>{question.user.name}</span>
+                <div className="flex items-center justify-between w-full px-2 mt-5 text-xs font-medium text-gray-500">
                   <span>{getTimeAgo(question.updatedAt)}</span>
                 </div>
-                <div className="flex px-4 space-x-5 mt-3 text-gray-700 py-2.5 border-t   w-full">
-                  <span className="flex items-center space-x-2 text-sm">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
-                    <span>관심 {question._count.interests}</span>
-                  </span>
-                  <span className="flex items-center space-x-2 text-sm">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                      ></path>
-                    </svg>
-                    <span>답변 {question._count.answers}</span>
-                  </span>
+                <div className="flex w-full px-2 mt-3 space-x-2 text-gray-700">
+                  {question._count.interests > 0 ? (
+                    <span className="relative flex items-center space-x-2 text-sm ">
+                      <BsHeart className="w-4 h-4 " />
+
+                      <span className="text-base">
+                        {question._count.interests}
+                      </span>
+                    </span>
+                  ) : null}
+
+                  {question._count.answers > 0 ? (
+                    <span className="relative flex items-center space-x-2 text-sm ">
+                      <BsChat className="w-4 h-4 -mt-[2px] -scale-x-100" />
+
+                      <span className="text-base">
+                        {question._count.answers}
+                      </span>
+                    </span>
+                  ) : null}
                 </div>
-              </a>
+              </div>
             </Link>
           ))}
       </div>
