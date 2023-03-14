@@ -1,10 +1,12 @@
 import Layout from "@components/layout";
+import TextArea from "@components/textarea";
 import useMutation from "@libs/client/useMutation";
 import { classNameHandler } from "@libs/client/utils";
 import { Answer, Question, User } from "@prisma/client";
 import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
 import useSWR from "swr";
 
 interface AnswerWithUser extends Answer {
@@ -26,13 +28,26 @@ interface QuestionResponse {
   isInterest: boolean;
 }
 
+interface AnswerForm {
+  answer: string;
+}
+
 const CommunityPostDetail: NextPage = () => {
   const router = useRouter();
+  const { register, handleSubmit, reset } = useForm<AnswerForm>();
+
+  const onAnswerVaild = (data: AnswerForm) => {
+    console.log(data.answer);
+    reset({ answer: "" });
+  };
+
   const { data, mutate } = useSWR<QuestionResponse>(
     router.query.id ? `/api/questions/${router.query.id}` : null
   );
 
-  const [interest] = useMutation(`/api/questions/${router.query.id}/interest`);
+  const [interest, { loading }] = useMutation(
+    `/api/questions/${router.query.id}/interest`
+  );
 
   const onInterestHandler = () => {
     if (!data) return;
@@ -52,7 +67,9 @@ const CommunityPostDetail: NextPage = () => {
       },
       false
     );
-    interest({});
+    if (!loading) {
+      interest({});
+    }
   };
 
   const getTimeAgo = (time: Date) => {
@@ -171,16 +188,17 @@ const CommunityPostDetail: NextPage = () => {
               </div>
             ))}
         </div>
-        <div className="px-4">
-          <textarea
+        <form className="px-4" onSubmit={handleSubmit(onAnswerVaild)}>
+          <TextArea
             className="w-full mt-1 border-gray-300 rounded-md shadow-sm resize-none focus:ring-orange-500 focus:border-orange-500 "
             rows={4}
             placeholder="댓글을 입력해 보세요!"
+            register={register("answer", { required: true })}
           />
           <button className="w-full px-4 py-2 mt-2 text-sm font-medium text-white bg-orange-500 border border-transparent rounded-md shadow-sm hover:bg-orange-600 focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:outline-none ">
             답변하기
           </button>
-        </div>
+        </form>
       </div>
     </Layout>
   );
